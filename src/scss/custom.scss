@@ -1,0 +1,246 @@
+$color-mg: #e9841d;
+$color-nau: #6fd528;
+$color-sdd: #E01E25;
+$color-crecer: white;
+$color-ia: purple;
+$color-jjcc: #eeed2e;
+$color-ind: #489389;
+
+//rgb(29, 135, 21);
+
+#bar-graph-hero {
+  padding-bottom: 40px;
+  padding-top: 20px;
+}
+
+#logo {
+  width: 200px;
+  margin: 10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#header .title {
+  margin: 10px 20px;
+  padding: 10px 0 0 10px;
+  display: inline-block;
+}
+
+.table-wrap {
+  max-height: 400px;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Custom bar graphs */
+.bar-graph {
+  .bar-item {
+    display: flex;
+    margin: 5px 5px 0;
+    padding: 0 0 5px;
+    &:not(:last-of-type) {
+      border-bottom: 1px solid darken($primary, 4);
+    }
+
+    .legend {
+      flex: 0 0 30%;
+      align-self: center;
+      max-width: 85px;
+    }
+
+    .percentage {
+      flex: 0 0 50px;
+      text-align: right;
+      align-self: center;
+    }
+
+    .bar-holder {
+      flex: 1;
+      height: 25px;
+      width: 100%;
+      border: 1px solid darken($primary, 10);
+      border-radius: 2px;
+      margin: 0 5px;
+      align-self: center;
+
+      .bar {
+        height: 100%;
+        background: lighten($primary, 5);
+        border-radius: 1px;
+        transition: all 0.2s;
+      }
+
+      .bar-mg {
+        background: $color-mg;
+      }
+      .bar-nau {
+        background: $color-nau;
+      }
+      .bar-sdd {
+        background: $color-sdd;
+      }
+      .bar-crecer {
+        background: $color-crecer;
+      }
+      .bar-ia {
+        background: $color-ia;
+      }
+
+    }
+  }
+}
+
+/* Votes pills */
+$vote-pill-radius: 5px;
+$vote-units-radius: 3px;
+$vote-units-bg: rgba(0, 0, 0, 0.15);
+.votes {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+
+  .vote {
+    flex: 1;
+    max-width: 55px;
+    text-align: center;
+    background: #eee;
+    padding: 5px;
+    box-shadow: 0 3px 1px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+    cursor: pointer;
+    color: black;
+
+    @each $mov, $color in (
+      mg: $color-mg, nau: $color-nau,
+      sdd: $color-sdd, crecer: $color-crecer,
+      ia: $color-ia, jjcc: $color-jjcc, ind: $color-ind
+    ) {
+      &.vote-#{$mov} {
+        background-color: $color;
+        @if $mov and $mov != "crecer" and $mov != "jjcc" { color: white;}
+
+        .label {
+          color: white;
+          @if $mov and $mov == "crecer" or $mov == "jjcc" { color: #444;}
+          opacity: 1;
+        }
+      }
+    }
+
+    &:first-of-type {
+      border-radius: $vote-pill-radius 0 0 $vote-pill-radius;
+    }
+
+    &:last-of-type {
+      border-radius: 0 $vote-pill-radius $vote-pill-radius 0;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .units {
+      font-size: 14px;
+      display: inline-block;
+      padding: 2px 5px;
+      border-radius: $vote-units-radius;
+      background: $vote-units-bg;
+    }
+
+    .percentage {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .label {
+      text-transform: uppercase;
+      font-size: 9px;
+      margin: 0;
+      padding: 0;
+      opacity: 0.7;
+    }
+  }
+}
+
+/* Vote counter */
+.vote-counter {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #666;
+}
+
+/* Day selectors */
+
+.day-selector {
+  display: block;
+  text-align: center;
+  margin: 10px auto;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+
+  input {
+    display: none;
+
+    &:checked + label {
+      background: $primary;
+      box-shadow: 0 3px darken($primary, 10);
+      color: white;
+    }
+  }
+
+  label {
+    vertical-align: bottom;
+    display: inline-block;
+    margin: 5px;
+    padding: 4px 10px 4px 5px;
+    background: #f0f0f0;
+    border-radius: 3px;
+    cursor: pointer;
+    color: #444;
+    transition: all 0.2s;
+
+    &:hover {
+      background: #f4f4f4;
+      color: #333;
+    }
+  }
+}
+
+.terri-mov {
+  display: block;
+  color: #666;
+  font-size: 12px;
+  text-transform: uppercase;
+  position: relative;
+
+  @each $mov, $color in (
+    mg: $color-mg, nau: $color-nau,
+    sdd: $color-sdd, crecer: #aaa,
+    ia: $color-ia, jjcc: $color-jjcc, ind: $color-ind
+  ) {
+    &.#{$mov}:before {
+      content: '•';
+      margin-right: 6px;
+      font-size: 20px;
+      display: inline-block;
+      color: $color;
+    }
+  }
+}
+
+.terri-electo {
+  display: block;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 3px;
+  text-align: center;
+
+  &.terri-electo-t {
+    background: $primary;
+    color: white;
+  }
+}

@@ -1,0 +1,70 @@
+mixin day-selector(id)
+  .day-selector
+    input(type='radio', name=`${id}`, value='dia1', id=`${id}-dia1`)
+    label(for=`${id}-dia1`) 🗓 Día 1
+    input(type='radio', name=`${id}`, value='dia2', id=`${id}-dia2`)
+    label(for=`${id}-dia2`) 🗓 Día 2
+    input(type='radio', name=`${id}`, value='total', id=`${id}-total`, checked)
+    label(for=`${id}-total`) 🗓 Ambos Días
+
+mixin bar-item(name, pc, colorcode)
+  .bar-item
+    .legend= name
+    .bar-holder
+      .bar(class=`bar-${colorcode}`, rv-width=`${pc}`)
+    .percentage {#{pc}}%
+
+mixin selector(kind)
+  p.control
+    select.input.is-large
+      if block
+        block
+      if kind === "territorios"
+        include territorios-options
+      else if kind === "mesas"
+        include mesas-options
+
+mixin canvas(id)
+  .chartgraph
+    canvas(id=`${id}`)
+
+mixin vote(classname, units, percentage, label)
+  .vote(class=(classname ? `vote-${classname}`: ''))
+    if label
+      .label= label
+    .units
+      | {#{units}}
+    if percentage
+      .percentage
+        | {#{percentage}}%
+
+mixin vote-counter
+  .vote-counter
+    | votos: {votos} - válidos: {votosve}
+    = ' '
+    span(rv-if='escrutada')
+      span.tag.is-small.is-info
+        block
+    span(rv-unless='escrutada')
+      span.tag.is-small
+        | no
+        = ' '
+        block
+
+mixin terri-row(id, name, qty)
+  tr
+    td(rowspan=`${qty + 1}`)= name
+  tr(rv-each-terri=`terris.${id}`)
+    td {terri.nombre}
+      span(class='terri-mov' rv-addclass='terri.movid') {terri.mov}
+    td {terri.votos}
+    td {terri.pc}%
+    td
+      span(
+        rv-if='terri.electo'
+        class='terri-electo terri-electo-t'
+      ) Sí
+      span(
+        rv-unless='terri.electo'
+        class='terri-electo terri-electo-f'
+      ) No

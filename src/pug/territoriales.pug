@@ -1,0 +1,17 @@
+.box
+  .title.is-3 Consejeros Territoriales
+  .columns
+    .column.is-7#bind-terris
+      include territoriales-table
+    .column#bind-terris-dist
+      h3.title.is-4 Consejo Federación
+      +canvas('consejo')
+      .votes
+        +vote('mg', 'mg', null, 'MG')
+        +vote('crecer', 'crecer', null, 'Crecer')
+        +vote('nau', 'nau', null, 'NAU')
+        +vote('sdd', 'sdd', null, 'SDD')
+      .votes
+        +vote('ind', 'ind', null, 'IND')
+        +vote('ia', 'ia', null, 'IA')
+        +vote('jjcc', 'jjcc', null, 'JJCC')

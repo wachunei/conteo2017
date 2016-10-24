@@ -1,0 +1,18 @@
+.box
+  .title.is-3 Mesas
+  form(name='selected-mesa')
+    +selector('mesas')
+  +day-selector('mesa-dia')
+  .columns
+    .column#bind-mesa-lista
+      h3.title.is-4 Lista FEUC
+      +canvas('mesa-lista')
+      include vote-pills-lista
+      +vote-counter
+        | escrutada
+    .column#bind-mesa-sup
+      h3.title.is-4 Consejero Superior
+      +canvas('mesa-sup')
+      include vote-pills-sup
+      +vote-counter
+        | escrutada

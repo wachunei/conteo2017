@@ -1,12 +1,45 @@
 doctype html
+include mixins
 html
-  include head.pug
+  include head
   body
     section.hero.is-medium.is-primary
-      .hero-body
+      .hero-head
+        .container#header
+          #logo
+            include logo-elp.svg
+          span Conteo Primera Vuelta
+      #bar-graph-hero.hero-body
         .container
-          h1 Resultados
+          .columns
+            .column#bind-summary-lista
+              h2.title.is-4 Total Lista FEUC
+              .bar-graph
+                +bar-item('1a', 'mgpc', 'mg')
+                +bar-item('Crecer', 'crecerpc', 'crecer')
+                +bar-item('NAU', 'naupc', 'nau')
+                +bar-item('Solidaridad', 'sddpc', 'sdd')
+            .column#bind-summary-sup
+              h2.title.is-4 Total Consejero Superior
+              .bar-graph
+                +bar-item('1a', 'mgpc', 'mg')
+                +bar-item('Crecer', 'crecerpc', 'crecer')
+                +bar-item('NAU', 'naupc', 'nau')
+                +bar-item('Solidaridad', 'sddpc', 'sdd')
+                +bar-item('iA', 'iapc', 'ia')
     section.section
-      h2.title.is-3 Detalles
-      include university-total.pug
-      include polling-stations.pug
+      .container
+        .notification.is-warning
+          button.delete
+          strong ¡No recargues esta página!
+          |, esta se actualizará automáticamente a medida que avanza el conteo.
+        h2.title.is-2 Detalle
+        include total
+        include mesas
+        include territorios
+        include territoriales
+        // include participativo
+        .columns
+          include escrutadas
+          include participacion
+    include footer

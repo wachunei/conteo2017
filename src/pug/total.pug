@@ -1,0 +1,16 @@
+.box
+  .title.is-3 Total Universidad
+  +day-selector('total-dia')
+  .columns
+    .column#bind-total-lista
+      h3.title.is-4 Lista FEUC
+      +canvas('total-lista')
+      include vote-pills-lista
+      +vote-counter
+        | escrutada
+    .column#bind-total-sup
+      h3.title.is-4 Consejero Superior
+      +canvas('total-sup')
+      include vote-pills-sup
+      +vote-counter
+        | escrutada
