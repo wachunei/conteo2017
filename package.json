@@ -1,12 +1,12 @@
 {
   "name": "conteo2017",
   "version": "1.0.0",
-  "description": "",
+  "description": "Online vote counting website for FEUC 2017 elections",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "wachunei",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.17.0",
@@ -22,8 +22,10 @@
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^2.1.1",
     "gulp-uglify": "^2.0.0",
+    "jquery": "^3.1.1",
     "rivets": "^0.9.4",
     "run-sequence": "^1.2.2",
+    "underscore": "^1.8.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },
