@@ -4,7 +4,10 @@ section.section
       a.button.is-outlined.is-primary(
         href='https://docs.google.com/spreadsheets/d/1PNINE7vaBDlM7rlWpOdWJQ0OvBobg_4J0Y_AFIngEm8/pubhtml',
         target='_blank'
-      ) 👀 Ver planilla en Google Sheets 📊
+      )
+        span.icon 👀
+        | Ver planilla en Google Sheets
+        span.icon 📊
 
 footer.footer
   .container.has-text-centered
@@ -19,4 +22,12 @@ footer.footer
             href='http://creativecommons.org/licenses/by-nc-nd/4.0/'
             target='_blank'
           )
-            | (cc) by-nc-nd
+            span.icon 🏷
+            |  (cc) by-nc-nd
+          = ' - '
+          a(
+            href='https://github.com/wachunei/conteo2017'
+            target='_blank'
+          )
+            span.icon 📜
+            |  código en github
