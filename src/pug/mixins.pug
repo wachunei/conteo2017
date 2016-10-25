@@ -62,9 +62,9 @@ mixin terri-row(id, name, qty)
     td
       span(
         rv-if='terri.electo'
-        class='terri-electo terri-electo-t'
+        class='tag is-medium is-success'
       ) Sí
       span(
         rv-unless='terri.electo'
-        class='terri-electo terri-electo-f'
+        class='tag is-medium'
       ) No

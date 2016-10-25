@@ -1,3 +1,21 @@
 .column
   .box#bind-mesas
-    .title.is-3 Mesas Escrutadas
+    span.title.is-3 Mesas Escrutadas
+    span
+      = '  '
+    span.subtitle {actual} de {total}
+    .table-wrap
+      table.table.is-narrow
+        thead
+          tr
+            td Mesa
+            td Día 1
+            td Día 2
+        tr(rv-each-mesa='mesas')
+          td {mesa.name}
+          td
+            span(class='tag is-medium is-success' rv-if='mesa.dia1') Sí
+            span(class='tag is-medium' rv-unless='mesa.dia1') No
+          td
+            span(class='tag is-medium is-success' rv-if='mesa.dia2') Sí
+            span(class='tag is-medium' rv-unless='mesa.dia2') No

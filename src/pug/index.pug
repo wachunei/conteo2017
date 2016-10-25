@@ -6,9 +6,11 @@ html
     section.hero.is-medium.is-primary
       .hero-head
         .container#header
-          #logo
+          span#logo
             include logo-elp.svg
           span Conteo Primera Vuelta
+          .is-pulled-right
+            small.update-notif Actualizando…
       #bar-graph-hero.hero-body
         .container
           .columns
@@ -29,12 +31,13 @@ html
                 +bar-item('iA', 'iapc', 'ia')
     section.section
       .container
-        .notification.is-warning
+        #refresh-notification.notification.is-warning
           button.delete
           strong ¡No recargues esta página!
           |, esta se actualizará automáticamente a medida que avanza el conteo.
         h2.title.is-2 Detalle
         include total
+        .notification.has-text-centered Acá va el mensaje
         include mesas
         include territorios
         include territoriales

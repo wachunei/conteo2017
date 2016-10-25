@@ -9,7 +9,7 @@ $color-ind: #489389;
 //rgb(29, 135, 21);
 
 #bar-graph-hero {
-  padding-bottom: 40px;
+  padding-bottom: 20px;
   padding-top: 20px;
 }
 
@@ -229,18 +229,5 @@ $vote-units-bg: rgba(0, 0, 0, 0.15);
       display: inline-block;
       color: $color;
     }
-  }
-}
-
-.terri-electo {
-  display: block;
-  margin: 5px;
-  padding: 5px;
-  border-radius: 3px;
-  text-align: center;
-
-  &.terri-electo-t {
-    background: $primary;
-    color: white;
   }
 }

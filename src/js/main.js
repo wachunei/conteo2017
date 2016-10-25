@@ -20,8 +20,8 @@ const UPDATE_TIME = 60000;
 
 $(document).ready(() => {
 
-  $('.notification button').click(function (e) {
-    $(this).parents('.notification').fadeOut();
+  $('#refresh-notification button').click(function (e) {
+    $(this).parents('#refresh-notification').fadeOut();
   });
 
   setTimeout(function () {$('.notification button').click();}, 5000);
@@ -131,15 +131,26 @@ $(document).ready(() => {
     'input[name=terri-dia], form[name=selected-terri] select',
     () => { if (mainData) { updateMainDataElements('terri'); } });
 
+  let $updateNotif = $('.update-notif');
+
   function renderData() {
+    $updateNotif.text('Actualizando…');
     getData()
       .then((object) => {
+        let now = new Date();
+        $updateNotif.text(
+          `Actualizado a las ${now.getHours()}:${now.getMinutes()}`
+        );
         mainData = object;
-        console.log(mainData);
         updateMainDataElements('getData');
       })
-      .catch((a) => console.log(a));
-  }
+      .catch((a) => {
+        $updateNotif.text(
+          `Error al actualizar`
+        );
+        console.log(a)
+      });
+  };
 
   renderData();
 
@@ -157,6 +168,10 @@ $(document).ready(() => {
       summaryLista = _.extendOwn(summaryLista, mainData.total.lista.total);
       summarySup = _.extendOwn(summarySup, mainData.total.sup.total);
 
+      _.each(mainData.terris, function (terri) {
+        terri.sort((a, b) => b.pc - a.pc);
+      });
+
       territoriales.terris = _.clone(mainData.terris);
       cantidadTerritoriales = _.extend(cantidadTerritoriales, mainData.totalct);
 
@@ -167,6 +182,27 @@ $(document).ready(() => {
         .map(Number)
         .value();
       chartCantTerri.update();
+
+      let escrutadasActual = 0;
+      mesasEscrutadas.mesas = [];
+      _.each(mainData.total.lista.mesa, (mesa) => {
+        mesasEscrutadas.mesas.push({
+          id: mesa.id,
+          name: mesa.name,
+          dia1: mainData.dia1.lista.mesa[mesa.id].escrutada,
+          dia2: mainData.dia2.lista.mesa[mesa.id].escrutada,
+        });
+
+        if (mainData.dia1.lista.mesa[mesa.id].escrutada) {
+          escrutadasActual++;
+        }
+
+        if (mainData.dia2.lista.mesa[mesa.id].escrutada) {
+          escrutadasActual++;
+        }
+      });
+
+      mesasEscrutadas.actual = escrutadasActual;
     }
 
     if (sender !== 'mesa' && sender !== 'terri') {
