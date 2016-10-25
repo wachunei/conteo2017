@@ -34,6 +34,7 @@ $color-ind: #489389;
 
 /* Custom bar graphs */
 .bar-graph {
+
   .bar-item {
     display: flex;
     margin: 5px 5px 0;
@@ -86,6 +87,24 @@ $color-ind: #489389;
         background: $color-ia;
       }
 
+    }
+  }
+
+  &.panel-graph {
+    .bar-item {
+      &:not(:last-of-type) {
+        border-bottom: 1px solid #ddd;
+      }
+
+      .bar-holder {
+        border-color: #aaa;
+      }
+
+      .legend {
+        flex: 0 0 35%;
+        align-self: center;
+        max-width: none;
+      }
     }
   }
 }

@@ -1,3 +1,8 @@
 .column
   .box#bind-participacion
-    .title.is-3 Participación
+    span.title.is-3 Participación
+    span
+      = '  '
+    span.subtitle por territorio
+    .table-wrap.bar-graph.panel-graph
+      +bar-item('{terri.name}', 'terri.pc')(rv-each-terri='terris')

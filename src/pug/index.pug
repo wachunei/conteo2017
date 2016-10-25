@@ -8,9 +8,7 @@ html
         .container#header
           span#logo
             include logo-elp.svg
-          span Conteo Primera Vuelta
-          .is-pulled-right
-            small.update-notif Actualizando…
+          span Primera Vuelta FEUC 2017
       #bar-graph-hero.hero-body
         .container
           .columns
@@ -34,8 +32,10 @@ html
         #refresh-notification.notification.is-warning
           button.delete
           strong ¡No recargues esta página!
-          |, esta se actualizará automáticamente a medida que avanza el conteo.
+          |  esta se actualizará automáticamente a medida que avanza el conteo.
         h2.title.is-2 Detalle
+          = ' '
+          span.tag.update-notif  Actualizando…
         include total
         .notification.has-text-centered Acá va el mensaje
         include mesas

@@ -17,6 +17,10 @@ Chart.defaults.global.elements.arc.borderWidth = 2;
 Chart.defaults.global.elements.arc.borderColor = '#ddd';
 
 const UPDATE_TIME = 60000;
+const NOTIF_DELAY = 8000;
+
+const QUARTERS = [25, 25, 25, 25];
+const FIFTHS = [20, 20, 20, 20];
 
 $(document).ready(() => {
 
@@ -24,7 +28,7 @@ $(document).ready(() => {
     $(this).parents('#refresh-notification').fadeOut();
   });
 
-  setTimeout(function () {$('.notification button').click();}, 5000);
+  setTimeout(function () {$('.notification button').click();}, NOTIF_DELAY);
 
   let mainData;
 
@@ -139,16 +143,21 @@ $(document).ready(() => {
       .then((object) => {
         let now = new Date();
         $updateNotif.text(
-          `Actualizado a las ${now.getHours()}:${now.getMinutes()}`
+          `Actualizado a las ${
+            ('0' + now.getHours()).slice(-2)
+          }:${
+            ('0' + now.getMinutes()).slice(-2)
+          }`
         );
         mainData = object;
         updateMainDataElements('getData');
+        console.log(mainData);
       })
       .catch((a) => {
         $updateNotif.text(
           `Error al actualizar`
         );
-        console.log(a)
+        console.error(a);
       });
   };
 
@@ -203,6 +212,22 @@ $(document).ready(() => {
       });
 
       mesasEscrutadas.actual = escrutadasActual;
+
+      _.each(mainData.total.lista.terri, (terri) => {
+        let updatedTerri = {
+          name: terri.name,
+          pc: terri.participacion,
+        };
+
+        let oldTerri = _.findWhere(participacion.terris, { name: terri.name });
+        if (oldTerri) {
+          _.extend(oldTerri, updatedTerri);
+        } else {
+          participacion.terris.push(updatedTerri);
+        }
+      });
+
+      participacion.terris.sort((a, b) => b.pc - a.pc);
     }
 
     if (sender !== 'mesa' && sender !== 'terri') {
@@ -216,7 +241,7 @@ $(document).ready(() => {
         chartTotalLista.data.datasets[0].data = newTotalListaData;
         chartTotalLista.update();
       } else {
-        chartTotalLista.data.datasets[0].data = [25, 25, 25, 25];
+        chartTotalLista.data.datasets[0].data = QUARTERS;
         chartTotalLista.update();
       }
 
@@ -227,7 +252,7 @@ $(document).ready(() => {
         chartTotalSup.data.datasets[0].data = newTotalSupData;
         chartTotalSup.update();
       } else {
-        chartTotalSup.data.datasets[0].data = [20, 20, 20, 20, 20];
+        chartTotalSup.data.datasets[0].data = FIFTHS;
         chartTotalSup.update();
       }
     }
@@ -250,7 +275,7 @@ $(document).ready(() => {
         chartMesaLista.data.datasets[0].data = newMesaListaData;
         chartMesaLista.update();
       } else {
-        chartMesaLista.data.datasets[0].data = [25, 25, 25, 25];
+        chartMesaLista.data.datasets[0].data = QUARTERS;
         chartMesaLista.update();
       }
 
@@ -261,7 +286,7 @@ $(document).ready(() => {
         chartMesaSup.data.datasets[0].data = newMesaSupData;
         chartMesaSup.update();
       } else {
-        chartMesaSup.data.datasets[0].data = [20, 20, 20, 20, 20];
+        chartMesaSup.data.datasets[0].data = FIFTHS;
         chartMesaSup.update();
       }
     }
@@ -284,7 +309,7 @@ $(document).ready(() => {
         chartTerriLista.data.datasets[0].data = newTerriListaData;
         chartTerriLista.update();
       } else {
-        chartTerriLista.data.datasets[0].data = [25, 25, 25, 25];
+        chartTerriLista.data.datasets[0].data = QUARTERS;
         chartTerriLista.update();
       }
 
@@ -295,7 +320,7 @@ $(document).ready(() => {
         chartTerriSup.data.datasets[0].data = newTerriSupData;
         chartTerriSup.update();
       } else {
-        chartTerriSup.data.datasets[0].data = [20, 20, 20, 20, 20];
+        chartTerriSup.data.datasets[0].data = FIFTHS;
         chartTerriSup.update();
       }
     }

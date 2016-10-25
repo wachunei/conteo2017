@@ -8,7 +8,7 @@ mixin day-selector(id)
     label(for=`${id}-total`) 🗓 Ambos Días
 
 mixin bar-item(name, pc, colorcode)
-  .bar-item
+  .bar-item&attributes(attributes)
     .legend= name
     .bar-holder
       .bar(class=`bar-${colorcode}`, rv-width=`${pc}`)
