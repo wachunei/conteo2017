@@ -153,7 +153,6 @@ $(document).ready(() => {
         );
         mainData = object;
         updateMainDataElements('getData');
-        console.log(mainData);
       })
       .catch((a) => {
         $errorNotif.fadeIn();

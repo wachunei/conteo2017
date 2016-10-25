@@ -1,5 +1,6 @@
 'use strict';
 import _ from 'underscore';
+import 'whatwg-fetch';
 
 const SHEET_ID = '1PNINE7vaBDlM7rlWpOdWJQ0OvBobg_4J0Y_AFIngEm8';
 const WSHEET_ID = 'oaqqg8y';
