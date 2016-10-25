@@ -24,11 +24,11 @@ const FIFTHS = [20, 20, 20, 20];
 
 $(document).ready(() => {
 
-  $('#refresh-notification button').click(function (e) {
-    $(this).parents('#refresh-notification').fadeOut();
+  $('.notification button').click(function (e) {
+    $(this).parents('.notification').fadeOut();
   });
 
-  setTimeout(function () {$('.notification button').click();}, NOTIF_DELAY);
+  setTimeout(function () {$('#refresh-notification button').click();}, NOTIF_DELAY);
 
   let mainData;
 
@@ -136,11 +136,13 @@ $(document).ready(() => {
     () => { if (mainData) { updateMainDataElements('terri'); } });
 
   let $updateNotif = $('.update-notif');
+  let $errorNotif = $('#error-notification');
 
   function renderData() {
     $updateNotif.text('Actualizando…');
     getData()
       .then((object) => {
+        $errorNotif.fadeOut();
         let now = new Date();
         $updateNotif.text(
           `Actualizado a las ${
@@ -154,6 +156,7 @@ $(document).ready(() => {
         console.log(mainData);
       })
       .catch((a) => {
+        $errorNotif.fadeIn();
         $updateNotif.text(
           `Error al actualizar`
         );

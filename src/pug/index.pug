@@ -29,10 +29,8 @@ html
                 +bar-item('iA', 'iapc', 'ia')
     section.section
       .container
-        #refresh-notification.notification.is-warning
-          button.delete
-          strong ¡No recargues esta página!
-          |  esta se actualizará automáticamente a medida que avanza el conteo.
+        include refresh-notification
+        include error-loading-notification
         h2.title.is-2 Detalle
           = ' '
           span.tag.update-notif  Actualizando…

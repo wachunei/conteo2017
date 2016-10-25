@@ -13,11 +13,14 @@
     "babel-preset-es2015": "^6.16.0",
     "babelify": "^7.3.0",
     "browserify": "^13.1.0",
+    "bulma": "^0.2.3",
+    "chart.js": "^2.3.0",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.0",
     "gulp-cssnano": "^2.1.2",
+    "gulp-if": "^2.0.1",
     "gulp-pug": "^3.1.0",
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^2.1.1",
@@ -27,8 +30,38 @@
     "run-sequence": "^1.2.2",
     "underscore": "^1.8.3",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "babel-core": "^6.17.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
     "bulma": "^0.2.3",
-    "chart.js": "^2.3.0"
-  }
+    "chart.js": "^2.3.0",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-if": "^2.0.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^2.1.1",
+    "gulp-pug": "^3.1.0",
+    "gulp-uglify": "^2.0.0",
+    "jquery": "^3.1.1",
+    "rivets": "^0.9.4",
+    "run-sequence": "^1.2.2",
+    "underscore": "^1.8.3",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wachunei/conteo2017.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wachunei/conteo2017/issues"
+  },
+  "homepage": "https://github.com/wachunei/conteo2017#readme"
 }

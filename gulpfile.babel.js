@@ -8,6 +8,7 @@ import concat from 'gulp-concat';
 import cssnano from 'gulp-cssnano';
 import del from 'del';
 import gulp from 'gulp';
+import gulpif from 'gulp-if';
 import pug from 'gulp-pug';
 import runSeq from 'run-sequence';
 import sass from 'gulp-sass';
@@ -40,6 +41,10 @@ const PATH = {
   },
 };
 
+var config = {
+  development: true,
+};
+
 gulp.task('clean', () => del('./build/*'));
 
 gulp.task('pug', () =>
@@ -66,25 +71,34 @@ gulp.task('scripts', () => {
     .on('error', function (err) { console.error(err); })
     .pipe(source(PATH.main.scripts))
     .pipe(buffer())
-    .pipe(sourcemaps.init())
+    .pipe(gulpif(config.development, sourcemaps.init()))
     .pipe(concat(PATH.main.scripts))
     .pipe(uglify())
-    .pipe(sourcemaps.write())
+    .pipe(gulpif(config.development, sourcemaps.write()))
     .pipe(gulp.dest(PATH.build.js));
 });
 
 gulp.task('images', () => gulp.src(PATH.src.images)
   .pipe(gulp.dest(PATH.build.images)));
 
-gulp.task('build', (cb) =>
-  runSeq('clean', ['scss', 'pug', 'scripts', 'images'], cb)
+gulp.task('build', (cb) => {
+    config.development = false;
+    runSeq('clean', ['scss', 'pug', 'scripts', 'images'], cb);
+  }
 );
 
-gulp.task('default', ['build']);
+gulp.task('build_dev', (cb) => {
+    config.development = true;
+    runSeq('clean', ['scss', 'pug', 'scripts', 'images'], cb);
+  }
+);
 
-gulp.task('watch', ['build'], () => {
+gulp.task('watch', ['build_dev'], () => {
+  config.development = true;
   gulp.watch([PATH.src.pug], ['pug']);
   gulp.watch([PATH.src.scss], ['scss']);
   gulp.watch([PATH.src.images], ['images']);
   gulp.watch([PATH.src.scripts], ['scripts']);
 });
+
+gulp.task('default', ['build']);
