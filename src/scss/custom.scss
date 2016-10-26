@@ -2,6 +2,7 @@ $color-mg: #e9841d;
 $color-nau: #6fd528;
 $color-sdd: #E01E25;
 $color-crecer: white;
+$color-crecer-alt: #aaa;
 $color-ia: purple;
 $color-jjcc: #eeed2e;
 $color-ind: #489389;
@@ -238,7 +239,7 @@ $vote-units-bg: rgba(0, 0, 0, 0.15);
 
   @each $mov, $color in (
     mg: $color-mg, nau: $color-nau,
-    sdd: $color-sdd, crecer: #aaa,
+    sdd: $color-sdd, crecer: $color-crecer-alt,
     ia: $color-ia, jjcc: $color-jjcc, ind: $color-ind
   ) {
     &.#{$mov}:before {

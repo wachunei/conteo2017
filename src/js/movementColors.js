@@ -5,3 +5,4 @@ export const COLOR_CRECER = 'white';
 export const COLOR_IA = 'purple';
 export const COLOR_IND = '#489389';
 export const COLOR_JJCC = '#eeed2e';
+export const COLOR_CRECER_ALT = '#aaa';

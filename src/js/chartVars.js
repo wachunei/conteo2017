@@ -3,6 +3,7 @@ import {
   COLOR_NAU,
   COLOR_SDD,
   COLOR_CRECER,
+  COLOR_CRECER_ALT,
   COLOR_IA,
   COLOR_IND,
   COLOR_JJCC,
@@ -95,7 +96,7 @@ export function terriDefaultData() {
           data: [0, 0, 0, 0, 0, 0, 0],
           backgroundColor: [
             COLOR_MG,
-            COLOR_CRECER,
+            COLOR_CRECER_ALT,
             COLOR_NAU,
             COLOR_SDD,
             COLOR_IND,
