@@ -16,7 +16,7 @@ import {
 Chart.defaults.global.elements.arc.borderWidth = 2;
 Chart.defaults.global.elements.arc.borderColor = '#ddd';
 
-const UPDATE_TIME = 60000;
+const UPDATE_TIME = 60000 * 3;
 const NOTIF_DELAY = 8000;
 
 const QUARTERS = [25, 25, 25, 25];
