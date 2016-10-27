@@ -63,7 +63,7 @@ export function listaDefaultData() {
 export function supDefaultData() {
   return {
     labels: [
-      'J. Palma', 'D. Pinto', 'JP. Gonzalez', 'L. Severino', 'J. Aragón',
+      'J. Palma', 'D. Pinto', 'JP. Gonzalez', 'J. Aragón', 'J. Echaurren',
     ],
     datasets: [
       {
