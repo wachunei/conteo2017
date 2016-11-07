@@ -2,11 +2,16 @@ import {
   COLOR_MG,
   COLOR_NAU,
   COLOR_SDD,
-  COLOR_CRECER,
-  COLOR_CRECER_ALT,
-  COLOR_IA,
-  COLOR_IND,
-  COLOR_JJCC,
+  COLOR_MAPAU,
+  COLOR_ANIM,
+  COLOR_TDI_COLL,
+  COLOR_EL_P,
+  COLOR_TDI_CAI,
+  COLOR_CACO,
+  COLOR_SPCH,
+  COLOR_JSF,
+  COLOR_CLMUN,
+  COLOR_PROY,
 } from './movementColors.js';
 
 export const defaultChartsOptions = {
@@ -26,32 +31,13 @@ export const defaultChartsOptions = {
   },
 };
 
-export const defaultPolarChartsOptions = {
-  responsive: true,
-  legend: {
-    display: false,
-  },
-  tooltips: {
-    callbacks: {
-      label: function (tooltipItem, data) {
-        let val = data.datasets[tooltipItem.datasetIndex]
-          .data[tooltipItem.index];
-        let lab = data.labels[tooltipItem.index];
-        return `${lab}: ${val}`;
-      },
-    },
-  },
-};
-
 export function listaDefaultData() {
   return {
-    labels: ['1a', 'Crecer', 'NAU', 'Solidaridad'],
+    labels: ['NAU', 'Solidaridad'],
     datasets: [
       {
-        data: [25, 25, 25, 25],
+        data: [50, 50],
         backgroundColor: [
-          COLOR_MG,
-          COLOR_CRECER,
           COLOR_NAU,
           COLOR_SDD,
         ],
@@ -63,16 +49,13 @@ export function listaDefaultData() {
 export function supDefaultData() {
   return {
     labels: [
-      'J. Palma', 'D. Pinto', 'JP. Gonzalez', 'J. Aragón', 'J. Echaurren',
+      'J. Palma', 'J. Echaurren',
     ],
     datasets: [
       {
-        data: [20, 20, 20, 20, 20],
+        data: [50, 50],
         backgroundColor: [
           COLOR_MG,
-          COLOR_CRECER,
-          COLOR_NAU,
-          COLOR_IA,
           COLOR_SDD,
         ],
       },
@@ -80,28 +63,34 @@ export function supDefaultData() {
   };
 };
 
-export function terriDefaultData() {
+export function projectsDefaultData() {
   return {
       labels: [
-      'MG',
-      'Crecer',
-      'NAU',
-      'Solidaridad',
-      'Independiente',
-      'Izquierda Autónoma',
-      'JJCC UC',
+      'MAPAU',
+      'Animalia',
+      'TDI College',
+      'El PUClítico',
+      'TDI CAi',
+      'Caconociéndonos',
+      'Servidores para Chile',
+      'Jóvenes sin Fronteras',
+      'Modelo Naciones Unidas',
+      'Proyecta',
     ],
       datasets: [
         {
-          data: [0, 0, 0, 0, 0, 0, 0],
+          data: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
           backgroundColor: [
-            COLOR_MG,
-            COLOR_CRECER_ALT,
-            COLOR_NAU,
-            COLOR_SDD,
-            COLOR_IND,
-            COLOR_IA,
-            COLOR_JJCC,
+            COLOR_MAPAU,
+            COLOR_ANIM,
+            COLOR_TDI_COLL,
+            COLOR_EL_P,
+            COLOR_TDI_CAI,
+            COLOR_CACO,
+            COLOR_SPCH,
+            COLOR_JSF,
+            COLOR_CLMUN,
+            COLOR_PROY,
           ],
         },
       ],
