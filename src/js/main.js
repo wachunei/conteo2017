@@ -6,10 +6,9 @@ import _ from 'underscore';
 
 import {
   defaultChartsOptions,
-  defaultPolarChartsOptions,
   listaDefaultData,
   supDefaultData,
-  terriDefaultData,
+  projectsDefaultData,
 } from './chartVars.js';
 
 // Chat.js global configuration
@@ -19,8 +18,8 @@ Chart.defaults.global.elements.arc.borderColor = '#ddd';
 const UPDATE_TIME = 60000 * 3;
 const NOTIF_DELAY = 8000;
 
-const QUARTERS = [25, 25, 25, 25];
-const FIFTHS = [20, 20, 20, 20];
+const HALVES = [50, 50];
+const TENTHS = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
 
 $(document).ready(() => {
 
@@ -38,7 +37,7 @@ $(document).ready(() => {
   let $ctxMesaSup = $('#mesa-sup');
   let $ctxTerriLista = $('#terri-lista');
   let $ctxTerriSup = $('#terri-sup');
-  let $ctxCantTerri = $('#consejo');
+  let $ctxProjects = $('#ppto');
 
   let chartTotalLista = new Chart($ctxTotalLista, {
       type: 'pie',
@@ -70,10 +69,10 @@ $(document).ready(() => {
       data: supDefaultData(),
       options: defaultChartsOptions,
     });
-  let chartCantTerri = new Chart($ctxCantTerri, {
-      type: 'polarArea',
-      data: terriDefaultData(),
-      options: defaultPolarChartsOptions,
+  let chartProjects = new Chart($ctxProjects, {
+      type: 'pie',
+      data: projectsDefaultData(),
+      options: defaultChartsOptions,
     });
 
   let summaryLista = _.extend({}, defaultObject);
@@ -84,8 +83,7 @@ $(document).ready(() => {
   let mesaSup = _.extend({}, defaultObject);
   let terriLista = _.extend({}, defaultObject);
   let terriSup = _.extend({}, defaultObject);
-  let territoriales = {};
-  let cantidadTerritoriales = {};
+  let projects = { projects: [] };
   let participacion = { terris: [] };
   let mesasEscrutadas = { mesas: [], actual: 0, total: 80 };
 
@@ -113,8 +111,7 @@ $(document).ready(() => {
   rivets.bind($('#bind-mesa-sup'), mesaSup);
   rivets.bind($('#bind-terri-sup'), terriSup);
   rivets.bind($('#bind-terri-lista'), terriLista);
-  rivets.bind($('#bind-terris'), territoriales);
-  rivets.bind($('#bind-terris-dist'), cantidadTerritoriales);
+  rivets.bind($('#bind-projects'), projects);
   rivets.bind($('#bind-mesas'), mesasEscrutadas);
   rivets.bind($('#bind-participacion'), participacion);
 
@@ -134,6 +131,11 @@ $(document).ready(() => {
     'change',
     'input[name=terri-dia], form[name=selected-terri] select',
     () => { if (mainData) { updateMainDataElements('terri'); } });
+
+  $(document).on(
+    'change',
+    'input[name=ppto-dia], form[name=selected-ppto] select',
+    () => { if (mainData) { updateMainDataElements('ppto'); } });
 
   let $updateNotif = $('.update-notif');
   let $errorNotif = $('#error-notification');
@@ -171,6 +173,7 @@ $(document).ready(() => {
     let diaTotal = $('input[name=total-dia]:checked').val();
     let diaMesa = $('input[name=mesa-dia]:checked').val();
     let diaTerri = $('input[name=terri-dia]:checked').val();
+    let diaPpto = $('input[name=ppto-dia]:checked').val();
 
     let selectedMesa = $('form[name=selected-mesa] select').val();
     let selectedTerri = $('form[name=selected-terri] select').val();
@@ -178,21 +181,6 @@ $(document).ready(() => {
     if (sender === 'getData') {
       summaryLista = _.extendOwn(summaryLista, mainData.total.lista.total);
       summarySup = _.extendOwn(summarySup, mainData.total.sup.total);
-
-      _.each(mainData.terris, function (terri) {
-        terri.sort((a, b) => b.pc - a.pc);
-      });
-
-      territoriales.terris = _.clone(mainData.terris);
-      cantidadTerritoriales = _.extend(cantidadTerritoriales, mainData.totalct);
-
-      chartCantTerri.data.datasets[0].data =
-        _.chain(cantidadTerritoriales)
-        .pick('mg', 'crecer', 'nau', 'sdd', 'ind', 'ia', 'jjcc')
-        .values()
-        .map(Number)
-        .value();
-      chartCantTerri.update();
 
       let escrutadasActual = 0;
       mesasEscrutadas.mesas = [];

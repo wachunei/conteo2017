@@ -1,9 +1,10 @@
 .box
   .title.is-3 Presupuesto Participativo
-  +selector('territorios')
-    option(value='total') Total Universidad
+  form(name='selected-ppto')
+    +selector('territorios')
+      option(value='total') Total Universidad
   +day-selector('ppto-dia')
-  .columns
+  .columns#bind-projects
     .column.is-7
       p aca va la tabla
     .column
