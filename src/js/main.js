@@ -83,7 +83,7 @@ $(document).ready(() => {
   let mesaSup = _.extend({}, defaultObject);
   let terriLista = _.extend({}, defaultObject);
   let terriSup = _.extend({}, defaultObject);
-  let projects = { projects: [] };
+  let projects = _.extend({ projects: [] }, defaultObject);
   let participacion = { terris: [] };
   let mesasEscrutadas = { mesas: [], actual: 0, total: 80 };
 
@@ -225,24 +225,24 @@ $(document).ready(() => {
       totalSup = _.extendOwn(totalSup, mainData[diaTotal].sup.total);
 
       let newTotalListaData = _.chain(totalLista)
-        .pick('mgpc', 'crecerpc', 'naupc', 'sddpc')
+        .pick('naupc', 'sddpc')
         .map(parseFloat).value();
       if (_.any(newTotalListaData, (n) => n > 0)) {
         chartTotalLista.data.datasets[0].data = newTotalListaData;
         chartTotalLista.update();
       } else {
-        chartTotalLista.data.datasets[0].data = QUARTERS;
+        chartTotalLista.data.datasets[0].data = HALVES;
         chartTotalLista.update();
       }
 
       let newTotalSupData = _.chain(totalSup)
-        .pick('mgpc', 'crecerpc', 'naupc', 'iapc', 'sddpc')
+        .pick('mgpc', 'sddpc')
         .map(parseFloat).value();
       if (_.any(newTotalSupData, (n) => n > 0)) {
         chartTotalSup.data.datasets[0].data = newTotalSupData;
         chartTotalSup.update();
       } else {
-        chartTotalSup.data.datasets[0].data = FIFTHS;
+        chartTotalSup.data.datasets[0].data = HALVES;
         chartTotalSup.update();
       }
     }
@@ -259,24 +259,24 @@ $(document).ready(() => {
       );
 
       let newMesaListaData = _.chain(mesaLista)
-        .pick('mgpc', 'crecerpc', 'naupc', 'sddpc')
+        .pick('naupc', 'sddpc')
         .map(parseFloat).value();
       if (_.any(newMesaListaData, (n) => n > 0)) {
         chartMesaLista.data.datasets[0].data = newMesaListaData;
         chartMesaLista.update();
       } else {
-        chartMesaLista.data.datasets[0].data = QUARTERS;
+        chartMesaLista.data.datasets[0].data = HALVES;
         chartMesaLista.update();
       }
 
       let newMesaSupData = _.chain(mesaSup)
-        .pick('mgpc', 'crecerpc', 'naupc', 'iapc', 'sddpc')
+        .pick('mgpc', 'sddpc')
         .map(parseFloat).value();
       if (_.any(newMesaSupData, (n) => n > 0)) {
         chartMesaSup.data.datasets[0].data = newMesaSupData;
         chartMesaSup.update();
       } else {
-        chartMesaSup.data.datasets[0].data = FIFTHS;
+        chartMesaSup.data.datasets[0].data = HALVES;
         chartMesaSup.update();
       }
     }
@@ -293,24 +293,24 @@ $(document).ready(() => {
       );
 
       let newTerriListaData = _.chain(terriLista)
-        .pick('mgpc', 'crecerpc', 'naupc', 'sddpc')
+        .pick('naupc', 'sddpc')
         .map(parseFloat).value();
       if (_.any(newTerriListaData, (n) => n > 0)) {
         chartTerriLista.data.datasets[0].data = newTerriListaData;
         chartTerriLista.update();
       } else {
-        chartTerriLista.data.datasets[0].data = QUARTERS;
+        chartTerriLista.data.datasets[0].data = HALVES;
         chartTerriLista.update();
       }
 
       let newTerriSupData = _.chain(terriSup)
-        .pick('mgpc', 'crecerpc', 'naupc', 'iapc', 'sddpc')
+        .pick('mgpc', 'sddpc')
         .map(parseFloat).value();
       if (_.any(newTerriSupData, (n) => n > 0)) {
         chartTerriSup.data.datasets[0].data = newTerriSupData;
         chartTerriSup.update();
       } else {
-        chartTerriSup.data.datasets[0].data = FIFTHS;
+        chartTerriSup.data.datasets[0].data = HALVES;
         chartTerriSup.update();
       }
     }
