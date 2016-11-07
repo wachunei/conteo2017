@@ -28,7 +28,7 @@ $(document).ready(() => {
     $(this).parents('.notification').fadeOut();
   });
 
-  setTimeout(function () {$('#refresh-notification button').click();}, NOTIF_DELAY);
+  // setTimeout(function () {$('#refresh-notification button').click();}, NOTIF_DELAY);
 
   let mainData;
 
