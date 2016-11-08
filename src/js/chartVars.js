@@ -71,10 +71,10 @@ export function projectsDefaultData() {
       'TDI College',
       'El PUClítico',
       'TDI CAi',
-      'Caconociéndonos',
+      'CACOnociéndonos',
       'Servidores para Chile',
       'Jóvenes sin Fronteras',
-      'Modelo Naciones Unidas',
+      'Modelo Naciones Unidas Chile',
       'Proyecta',
     ],
       datasets: [
