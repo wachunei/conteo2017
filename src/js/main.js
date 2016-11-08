@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import Chart from 'chart.js';
 import { getData, getServerData, defaultObject } from './dataFetcher.js';
+import { defaultProjects } from './projectsArray.js';
 import rivets from 'rivets';
 import _ from 'underscore';
 
@@ -83,7 +84,7 @@ $(document).ready(() => {
   let mesaSup = _.extend({}, defaultObject);
   let terriLista = _.extend({}, defaultObject);
   let terriSup = _.extend({}, defaultObject);
-  let projects = _.extend({ projects: [] }, defaultObject);
+  let projects = _.extend({ projects: defaultProjects }, defaultObject);
   let participacion = { terris: [] };
   let mesasEscrutadas = { mesas: [], actual: 0, total: 80 };
 
@@ -177,6 +178,7 @@ $(document).ready(() => {
 
     let selectedMesa = $('form[name=selected-mesa] select').val();
     let selectedTerri = $('form[name=selected-terri] select').val();
+    let selectedPpto = $('form[name=selected-ppto] select').val();
 
     if (sender === 'getData') {
       summaryLista = _.extendOwn(summaryLista, mainData.total.lista.total);
@@ -220,7 +222,7 @@ $(document).ready(() => {
       participacion.terris.sort((a, b) => b.pc - a.pc);
     }
 
-    if (sender !== 'mesa' && sender !== 'terri') {
+    if (sender !== 'mesa' && sender !== 'terri' && sender !== 'ppto') {
       totalLista = _.extendOwn(totalLista, mainData[diaTotal].lista.total);
       totalSup = _.extendOwn(totalSup, mainData[diaTotal].sup.total);
 
@@ -247,7 +249,7 @@ $(document).ready(() => {
       }
     }
 
-    if (sender !== 'total' && sender !== 'terri') {
+    if (sender !== 'total' && sender !== 'terri' && sender !== 'ppto') {
       mesaLista = _.extendOwn(
         mesaLista,
         mainData[diaMesa].lista.mesa[selectedMesa]
@@ -281,7 +283,7 @@ $(document).ready(() => {
       }
     }
 
-    if (sender !== 'total' && sender !== 'mesa') {
+    if (sender !== 'total' && sender !== 'mesa' && sender !== 'ppto') {
       terriLista = _.extendOwn(
         terriLista,
         mainData[diaTerri].lista.terri[selectedTerri]
@@ -315,5 +317,32 @@ $(document).ready(() => {
       }
     }
 
+    if (sender !== 'total' && sender !== 'mesa' && sender !== 'terri') {
+      let extendObj = selectedPpto === 'total' ?
+        mainData[diaPpto].ppto.total :
+        mainData[diaPpto].ppto.terri[selectedPpto];
+
+      projects = _.extendOwn(
+        projects,
+        extendObj
+      );
+      projects.projects.forEach((project) => {
+        project.pc = extendObj[`${project.id}pc`];
+      });
+
+      let newProjectsData = _.chain(extendObj)
+        .pick('mapaupc', 'anipc', 'tdicollpc', 'elppc', 'tdicaipc',
+        'cacopc', 'spchpc', 'jsfpc', 'clmunpc', 'proypc')
+        .map(parseFloat).value();
+      if (_.any(newProjectsData, (n) => n > 0)) {
+        chartProjects.data.datasets[0].data = newProjectsData;
+        chartProjects.update();
+      } else {
+        chartProjects.data.datasets[0].data = TENTHS;
+        chartProjects.update();
+      }
+
+      projects.projects.sort((a, b) => b.pc - a.pc);
+    };
   };
 });

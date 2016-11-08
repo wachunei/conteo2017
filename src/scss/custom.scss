@@ -15,6 +15,7 @@ $color-caco: #F0F;
 $color-spch: #1C4587;
 $color-jsf: #C00;
 $color-clmun: #FFF;
+$color-clmun-alt: #AAA;
 $color-proy: #3EACDE;
 
 #bar-graph-hero {
@@ -90,6 +91,21 @@ $color-proy: #3EACDE;
         background: $color-sdd;
       }
     }
+
+    &.project-bar-item {
+      padding: 9px 0;
+    }
+
+    @each $project, $color in (
+      mapau: $color-mapau, ani: $color-ani, tdicoll: $color-tdi-coll,
+      elp: $color-el-p, tdicai: $color-tdi-cai, caco: $color-caco,
+      spch: $color-spch, jsf: $color-jsf, clmun: $color-clmun-alt,
+      proy: $color-proy
+    ) {
+      &.#{$project} .bar-holder .bar {
+        background-color: $color;
+      }
+    }
   }
 
   &.panel-graph {
@@ -106,6 +122,8 @@ $color-proy: #3EACDE;
         flex: 0 0 35%;
         align-self: center;
         max-width: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }

@@ -5,8 +5,13 @@
       option(value='total') Total Universidad
   +day-selector('ppto-dia')
   .columns#bind-projects
-    .column.is-7
-      p aca va la tabla
+    .column
+      .bar-graph.panel-graph
+        +bar-item('{ppto.name}', 'ppto.pc')(
+          rv-each-ppto='projects'
+          rv-addclass='ppto.id'
+          class='project-bar-item'
+        )
     .column
       +canvas('ppto')
       include vote-pills-ppto
