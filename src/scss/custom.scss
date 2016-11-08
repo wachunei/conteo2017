@@ -129,6 +129,73 @@ $color-proy: #3EACDE;
   }
 }
 
+/* ballotage bar full graph */
+.bar-full-graph {
+  display: flex;
+
+  .bar-item {
+    flex: 0 0 20%;
+    padding: 3px;
+    order: 3;
+
+    &:first-of-type {
+      order: 1;
+      text-align: right;
+    }
+  }
+
+  .bar-full-item {
+    flex: 1;
+    order: 2;
+
+    .bar-holder {
+      border: 1px solid darken($primary, 15);
+      border-radius: 2px;
+      margin: 0 5px;
+      height: 54px;
+      font-size: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+
+      &::before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        height: 100%;
+        border-right: 1px solid black;
+        left: calc(50% - 1px);
+      }
+    }
+
+    .bar {
+      height: 100%;
+      background: lighten($primary, 5);
+      border-radius: 2px;
+      transition: all 0.2s;
+      display: inline-block;
+
+      &:first-of-type {
+        border-radius: 2px 0 0 2px;
+      }
+
+      &:last-of-type {
+        border-radius: 0 2px 2px 0;
+      }
+    }
+
+    .bar-mg {
+      background: $color-mg;
+    }
+    .bar-nau {
+      background: $color-nau;
+    }
+    .bar-sdd {
+      background: $color-sdd;
+    }
+  }
+}
+
 /* Votes pills */
 $vote-pill-radius: 5px;
 $vote-units-radius: 3px;

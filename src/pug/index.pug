@@ -18,19 +18,30 @@ html
           .columns
             .column#bind-summary-lista
               h2.title.is-4 Total Lista FEUC
-              .bar-graph
-                +bar-item('1a', 'mgpc', 'mg')
-                +bar-item('Crecer', 'crecerpc', 'crecer')
-                +bar-item('NAU', 'naupc', 'nau')
-                +bar-item('Solidaridad', 'sddpc', 'sdd')
+              .bar-full-graph
+                .bar-item
+                  .legend NAU
+                  .percentage {naupc}%
+                .bar-item
+                  .legend Solidaridad
+                  .percentage {sddpc}%
+                .bar-full-item
+                  .bar-holder
+                    .bar.bar-nau(rv-width='naupc')
+                    .bar.bar-sdd(rv-width='sddpc')
             .column#bind-summary-sup
               h2.title.is-4 Total Consejero Superior
-              .bar-graph
-                +bar-item('1a', 'mgpc', 'mg')
-                +bar-item('Crecer', 'crecerpc', 'crecer')
-                +bar-item('NAU', 'naupc', 'nau')
-                +bar-item('Solidaridad', 'sddpc', 'sdd')
-                +bar-item('iA', 'iapc', 'ia')
+              .bar-full-graph
+                .bar-item
+                  .legend 1a
+                  .percentage {mgpc}%
+                .bar-item
+                  .legend Solidaridad
+                  .percentage {sddpc}%
+                .bar-full-item
+                  .bar-holder
+                    .bar.bar-mg(rv-width='mgpc')
+                    .bar.bar-sdd(rv-width='sddpc')
     section.section
       .container
         include refresh-notification
