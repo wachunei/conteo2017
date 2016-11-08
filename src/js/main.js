@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import Chart from 'chart.js';
-import { getData, defaultObject } from './dataFetcher.js';
+import { getData, getServerData, defaultObject } from './dataFetcher.js';
 import rivets from 'rivets';
 import _ from 'underscore';
 
@@ -15,7 +15,7 @@ import {
 Chart.defaults.global.elements.arc.borderWidth = 2;
 Chart.defaults.global.elements.arc.borderColor = '#ddd';
 
-const UPDATE_TIME = 60000 * 3;
+const UPDATE_TIME = 60000;
 const NOTIF_DELAY = 8000;
 
 const HALVES = [50, 50];
@@ -142,7 +142,7 @@ $(document).ready(() => {
 
   function renderData() {
     $updateNotif.text('Actualizando…');
-    getData()
+    getServerData()
       .then((object) => {
         $errorNotif.fadeOut();
         let now = new Date();

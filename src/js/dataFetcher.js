@@ -2,7 +2,8 @@
 import _ from 'underscore';
 import 'whatwg-fetch';
 
-const SHEET_ID = '1PNINE7vaBDlM7rlWpOdWJQ0OvBobg_4J0Y_AFIngEm8';
+const SERVER_URL = 'https://young-retreat-67811.herokuapp.com/';
+const SHEET_ID = '1eFW5Ww21HZWbvmlDElfuS2TcLWcCnkY-tGia-goi-NE';
 const WSHEET_ID = 'oaqqg8y';
 const SHEET_URL = `https://spreadsheets.google.com/feeds/list/${SHEET_ID}` +
                   `/${WSHEET_ID}/public/values?alt=json`;
@@ -15,12 +16,8 @@ const getFullObject = (obj) => {
     name: g(obj, 'name'),
     mg: g(obj, 'mg'),
     mgpc:	g(obj, 'mgpc'),
-    crecer: g(obj, 'crecer'),
-    crecerpc: g(obj, 'crecerpc'),
     nau: g(obj, 'nau'),
     naupc: g(obj, 'naupc'),
-    ia: g(obj, 'ia'),
-    iapc: g(obj, 'iapc'),
     sdd: g(obj, 'sdd'),
     sddpc: g(obj, 'sddpc'),
     b: g(obj, 'b'),
@@ -31,6 +28,26 @@ const getFullObject = (obj) => {
     votos: g(obj, 'votos'),
     escrutada: g(obj, 'escrutada') == 'TRUE',
     participacion: g(obj, 'participacion'),
+    mapau: g(obj, 'mapau'),
+    mapaupc: g(obj, 'mapaupc'),
+    ani: g(obj, 'ani'),
+    anipc: g(obj, 'anipc'),
+    tdicoll: g(obj, 'tdicoll'),
+    tdicollpc: g(obj, 'tdicollpc'),
+    elp: g(obj, 'elp'),
+    elppc: g(obj, 'elppc'),
+    tdicai: g(obj, 'tdicai'),
+    tdicaipc: g(obj, 'tdicaipc'),
+    caco: g(obj, 'caco'),
+    cacopc: g(obj, 'cacopc'),
+    spch: g(obj, 'spch'),
+    spchpc: g(obj, 'spchpc'),
+    jsf: g(obj, 'jsf'),
+    jsfpc: g(obj, 'jsfpc'),
+    clmun: g(obj, 'clmun'),
+    clmunpc: g(obj, 'clmunpc'),
+    proy: g(obj, 'proy'),
+    proypc: g(obj, 'proypc'),
   };
 
   return fullObj;
@@ -48,6 +65,10 @@ const converter = function (sheetObject) {
         terri: {},
         total: {},
       },
+      ppto: {
+        terri: {},
+        total: {},
+      },
     },
     dia2: {
       lista: {
@@ -56,6 +77,10 @@ const converter = function (sheetObject) {
         total: {},
       }, sup: {
         mesa: {},
+        terri: {},
+        total: {},
+      },
+      ppto: {
         terri: {},
         total: {},
       },
@@ -71,42 +96,28 @@ const converter = function (sheetObject) {
         terri: {},
         total: {},
       },
+      ppto: {
+        terri: {},
+        total: {},
+      },
     },
-    terris: {},
-    totalct: {},
   };
   let lines =  sheetObject.feed.entry;
 
   lines.forEach((line) => {
-
     if (_.contains(['dia1', 'dia2', 'total'], g(line, 'tiempo'))) {
       if (_.contains(['total'], g(line, 'area'))) {
         converted
           [g(line, 'tiempo')]
           [g(line, 'tipo')]
           [g(line, 'area')] = getFullObject(line);
-      } else {
+      } else if (!(g(line, 'tipo') === 'ppto' && g(line, 'area') === 'mesa')) {
         converted
           [g(line, 'tiempo')]
           [g(line, 'tipo')]
           [g(line, 'area')]
           [g(line, 'id')] = getFullObject(line);
       }
-    } else if (_.contains(['terris'], g(line, 'tiempo'))) {
-      if (!_.isArray(converted.terris[g(line, 'area')])) {
-        converted.terris[g(line, 'area')] = [];
-      }
-
-      converted.terris[g(line, 'area')].push({
-        mov: g(line, 'id'),
-        movid: g(line, 'tipo'),
-        nombre: g(line, 'name'),
-        votos: g(line, 'mg'),
-        pc: g(line, 'mgpc'),
-        electo: g(line, 'crecer') == 'TRUE',
-      });
-    } else if (_.contains(['totalct'], g(line, 'tiempo'))) {
-      converted.totalct[g(line, 'tipo')] = g(line, 'area');
     }
 
   });
@@ -124,6 +135,11 @@ export function getData() {
 
       return convertPromise;
     });
+};
+
+export function getServerData() {
+  return fetch(SERVER_URL)
+    .then((response) => response.json());
 }
 
 export const defaultObject = {
