@@ -6,8 +6,16 @@ $color-crecer-alt: #aaa;
 $color-ia: purple;
 $color-jjcc: #eeed2e;
 $color-ind: #489389;
-
-//rgb(29, 135, 21);
+$color-mapau: #80583e;
+$color-ani: #489838;
+$color-tdi-coll: #FBA63E;
+$color-el-p: #000;
+$color-tdi-cai: #FF0;
+$color-caco: #F0F;
+$color-spch: #1C4587;
+$color-jsf: #C00;
+$color-clmun: #FFF;
+$color-proy: #3EACDE;
 
 #bar-graph-hero {
   padding-bottom: 20px;
@@ -81,13 +89,6 @@ $color-ind: #489389;
       .bar-sdd {
         background: $color-sdd;
       }
-      .bar-crecer {
-        background: $color-crecer;
-      }
-      .bar-ia {
-        background: $color-ia;
-      }
-
     }
   }
 
@@ -121,7 +122,7 @@ $vote-units-bg: rgba(0, 0, 0, 0.15);
 
   .vote {
     flex: 1;
-    max-width: 55px;
+    max-width: 60px;
     text-align: center;
     background: #eee;
     padding: 5px;
@@ -133,15 +134,21 @@ $vote-units-bg: rgba(0, 0, 0, 0.15);
     @each $mov, $color in (
       mg: $color-mg, nau: $color-nau,
       sdd: $color-sdd, crecer: $color-crecer,
-      ia: $color-ia, jjcc: $color-jjcc, ind: $color-ind
+      ia: $color-ia, jjcc: $color-jjcc, ind: $color-ind,
+      mapau: $color-mapau, ani: $color-ani, 'tdi-coll': $color-tdi-coll,
+      'el-p': $color-el-p, 'tdi-cai': $color-tdi-cai, caco: $color-caco,
+      spch: $color-spch, jsf: $color-jsf, clmun: $color-clmun,
+      proy: $color-proy
     ) {
       &.vote-#{$mov} {
         background-color: $color;
-        @if $mov and $mov != "crecer" and $mov != "jjcc" { color: white;}
+        @if $mov and $mov != "crecer" and $mov != "jjcc"
+          and $mov != "tdi-cai" and $mov != "clmun" { color: white;}
 
         .label {
           color: white;
-          @if $mov and $mov == "crecer" or $mov == "jjcc" { color: #444;}
+          @if $mov and $mov == "crecer" or $mov == "jjcc"
+            or $mov == "tdi-cai" or $mov == "clmun" { color: #444;}
           opacity: 1;
         }
       }
@@ -174,11 +181,14 @@ $vote-units-bg: rgba(0, 0, 0, 0.15);
     }
 
     .label {
+      white-space: nowrap;
       text-transform: uppercase;
       font-size: 9px;
       margin: 0;
       padding: 0;
       opacity: 0.7;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
