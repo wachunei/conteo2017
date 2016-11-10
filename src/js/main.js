@@ -86,7 +86,7 @@ $(document).ready(() => {
   let terriSup = _.extend({}, defaultObject);
   let projects = _.extend({ projects: defaultProjects }, defaultObject);
   let participacion = { terris: [] };
-  let mesasEscrutadas = { mesas: [], actual: 0, total: 82 };
+  let mesasEscrutadas = { mesas: [], actual: 0, total: 81 };
 
   rivets.binders.width = function (el, value) {
     el.style.width = `${value}%`;
