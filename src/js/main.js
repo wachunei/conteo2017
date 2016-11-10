@@ -143,7 +143,7 @@ $(document).ready(() => {
 
   function renderData() {
     $updateNotif.text('Actualizando…');
-    getServerData()
+    getData()
       .then((object) => {
         $errorNotif.fadeOut();
         let now = new Date();
@@ -168,7 +168,7 @@ $(document).ready(() => {
 
   renderData();
 
-  setInterval(renderData, UPDATE_TIME);
+  // setInterval(renderData, UPDATE_TIME);
 
   const updateMainDataElements = (sender) => {
     let diaTotal = $('input[name=total-dia]:checked').val();
